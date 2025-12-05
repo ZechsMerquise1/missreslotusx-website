@@ -1,66 +1,45 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* app/globals.css */
+@import "tailwindcss";
 
-/* Brand colors as HSL “color wheel” variables */
-:root {
-  --background: 222 20% 8%;
-  --foreground: 0 0% 100%;
 
-  --primary: 195 85% 55%;   /* teal / blue */
-  --secondary: 275 70% 60%; /* muted purple */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    /* Use plain CSS here instead of unknown Tailwind utilities */
+    background-color: #050509;
+    color: #f9fafb;
+    @apply antialiased;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl font-semibold tracking-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl font-semibold tracking-tight;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl font-semibold tracking-tight;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl font-semibold tracking-tight;
+  }
+
+  h5 {
+    @apply text-lg md:text-xl font-semibold tracking-tight;
+  }
+
+  h6 {
+    @apply text-base md:text-lg font-semibold tracking-tight;
+  }
+
+  p {
+    @apply text-sm md:text-base leading-relaxed text-white/80;
+  }
 }
 
-/* Global body styles using plain CSS */
-body {
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-  -webkit-font-smoothing: antialiased;
-  margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-}
-
-/* Typography scale: h1–h6 + paragraph, all plain CSS */
-h1 {
-  font-size: 2.75rem;      /* ~44px */
-  line-height: 1.1;
-  font-weight: 600;
-  letter-spacing: -0.04em;
-}
-
-h2 {
-  font-size: 2.25rem;      /* ~36px */
-  line-height: 1.15;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-}
-
-h3 {
-  font-size: 1.875rem;     /* ~30px */
-  line-height: 1.2;
-  font-weight: 600;
-}
-
-h4 {
-  font-size: 1.5rem;       /* ~24px */
-  line-height: 1.25;
-  font-weight: 600;
-}
-
-h5 {
-  font-size: 1.25rem;      /* ~20px */
-  line-height: 1.3;
-  font-weight: 600;
-}
-
-h6 {
-  font-size: 1.0625rem;    /* ~17px */
-  line-height: 1.4;
-  font-weight: 500;
-}
-
-p {
-  font-size: 1rem;         /* 16px */
-  line-height: 1.6;
-}
