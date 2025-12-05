@@ -35,9 +35,10 @@ export default function Hero() {
             Book Session
           </Button>
 
-          <Button className="bg-transparent border-white/40 hover:bg-white/10">
-            View Portfolio
-          </Button>
+        <Button variant="secondary">
+        View Portfolio
+        </Button>
+
         </div>
       </div>
     </section>
