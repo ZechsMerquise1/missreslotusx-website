@@ -5,7 +5,7 @@ import Button from "./ui/button";
 
 export default function Hero() {
   return (
-    <section className="relative flex h-screen w-full items-center justify-center overflow-hidden">
+    <section className="relative flex h-screen w-full items-start justify-center overflow-hidden pt-32">
       {/* Background image */}
       <div className="absolute inset-0">
         <Image
@@ -35,10 +35,9 @@ export default function Hero() {
             Book Session
           </Button>
 
-        <Button variant="secondary">
-        View Portfolio
-        </Button>
-
+          <Button variant="secondary">
+            View Portfolio
+          </Button>
         </div>
       </div>
     </section>
