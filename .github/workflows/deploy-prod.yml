@@ -14,7 +14,7 @@ jobs:
         with:
           host: ${{ secrets.MLX_HOST }}
           username: ${{ secrets.MLX_USER }}      # should be "mistresslotusx"
-          key: ${{ secrets.MLX_KEY }}
+          password: ${{ secrets.MLX_PASSWORD }}  # NEW: using password instead of key
           port: 22
           script: |
             # Go to your production app folder
