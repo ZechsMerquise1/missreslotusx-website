@@ -56,6 +56,88 @@ export default function CustomsPage() {
                 />
               </div>
 
+              {/* Custom Type */}
+              <div>
+                <p className="block text-xs font-medium uppercase tracking-[0.15em] text-white/80">
+                  Custom type
+                </p>
+
+                <div className="mt-3 grid grid-cols-3 gap-3">
+                  {/* Video */}
+                  <label className="group cursor-pointer">
+                    <input
+                      type="radio"
+                      name="type"
+                      value="video"
+                      className="peer sr-only"
+                      required
+                    />
+                    <div
+                      className="
+                        w-full rounded-full px-3 py-2 text-center text-xs sm:text-sm
+                        bg-black/30 text-white/80 border border-white/25 shadow-glass backdrop-blur-xl
+                        transition-all
+                        group-hover:border-white/40 group-hover:bg-white/5
+
+                        peer-checked:border-purple-400
+                        peer-checked:text-white
+                        peer-checked:shadow-[0_0_12px_rgba(168,85,247,0.5)]
+                      "
+                    >
+                      Video
+                    </div>
+                  </label>
+
+                  {/* Photo */}
+                  <label className="group cursor-pointer">
+                    <input
+                      type="radio"
+                      name="type"
+                      value="photo"
+                      className="peer sr-only"
+                    />
+                    <div
+                      className="
+                        w-full rounded-full px-3 py-2 text-center text-xs sm:text-sm
+                        bg-black/30 text-white/80 border border-white/25 shadow-glass backdrop-blur-xl
+                        transition-all
+                        group-hover:border-white/40 group-hover:bg-white/5
+
+                        peer-checked:border-purple-400
+                        peer-checked:text-white
+                        peer-checked:shadow-[0_0_12px_rgba(168,85,247,0.5)]
+                      "
+                    >
+                      Photo
+                    </div>
+                  </label>
+
+                  {/* Both */}
+                  <label className="group cursor-pointer">
+                    <input
+                      type="radio"
+                      name="type"
+                      value="both"
+                      className="peer sr-only"
+                    />
+                    <div
+                      className="
+                        w-full rounded-full px-3 py-2 text-center text-xs sm:text-sm
+                        bg-black/30 text-white/80 border border-white/25 shadow-glass backdrop-blur-xl
+                        transition-all
+                        group-hover:border-white/40 group-hover:bg-white/5
+
+                        peer-checked:border-purple-400
+                        peer-checked:text-white
+                        peer-checked:shadow-[0_0_12px_rgba(168,85,247,0.5)]
+                      "
+                    >
+                      Both
+                    </div>
+                  </label>
+                </div>
+              </div>
+
               {/* Request Details */}
               <div>
                 <label
