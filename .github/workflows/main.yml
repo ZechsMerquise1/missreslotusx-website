@@ -1,4 +1,4 @@
-name: Deploy to Production
+name: Deploy to Test
 
 on:
   push:
@@ -12,15 +12,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy to prod server
+      - name: Deploy to test server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.MLX_HOST }}
           username: ${{ secrets.MLX_USER }}
           key: ${{ secrets.MLX_KEY }}
           script: |
-            cd /home/mistresslotusx/htdocs/mistresslotusx.com
+            cd /home/mistresslotusx/htdocs/test.mistresslotusx.com
             git pull
             npm install --omit=dev
             npm run build
-            pm2 restart mistresslotusx
+            pm2 restart mistresslotusx-test
