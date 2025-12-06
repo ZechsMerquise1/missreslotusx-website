@@ -2,25 +2,28 @@ name: Deploy to Test
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Deploy to test server
+      - name: Deploy to MLX staging via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.MLX_HOST }}
-          username: ${{ secrets.MLX_USER }}
-          key: ${{ secrets.MLX_KEY }}
+          host: ${{ secrets.MLX_STAGING_HOST }}
+          username: ${{ secrets.MLX_STAGING_USER }}
+          key: ${{ secrets.MLX_STAGING_SSH_KEY }}
+          port: ${{ secrets.MLX_STAGING_PORT }}
           script: |
-            cd /home/mistresslotusx/htdocs/test.mistresslotusx.com
-            git pull
-            npm install --omit=dev
+            cd /home/mistresslotusx-test/htdocs/test.mistresslotusx.com/app
+
+            git fetch origin
+            git reset --hard origin/main
+
+            npm install
             npm run build
-            pm2 restart mistresslotusx-test
+
+            pm2 restart mlx-test
