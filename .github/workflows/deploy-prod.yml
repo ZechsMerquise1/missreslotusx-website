@@ -13,7 +13,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.MLX_HOST }}
-          username: ${{ secrets.MLX_USER }}
+          username: ${{ secrets.MLX_USER }}      # should be "mistresslotusx"
           key: ${{ secrets.MLX_KEY }}
           port: 22
           script: |
@@ -21,15 +21,17 @@ jobs:
             cd /home/mistresslotusx/htdocs/mistresslotusx.com/app
 
             # Allow git to trust this directory (fixes "dubious ownership" error)
-            git config --global --add safe.directory /home/mistresslotusx/htdocs/mistresslotusx.com
+            git config --global --add safe.directory /home/mistresslotusx/htdocs/mistresslotusx.com/app
 
             # Sync code from GitHub main branch
             git fetch origin
             git reset --hard origin/main
 
-            # Install all dependencies and build
-            npm install
+            # Install dependencies (omit devDependencies in production)
+            npm install --omit=dev
+
+            # Build the Next.js app
             npm run build
 
-            # Restart PM2 process (change name if your prod process is different)
+            # Restart PM2 process for production
             pm2 restart mlx-prod || echo "PM2 process 'mlx-prod' not found, please restart your prod process manually."
