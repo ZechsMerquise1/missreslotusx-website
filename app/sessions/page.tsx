@@ -15,7 +15,7 @@ export default function SessionsPage() {
 
       <main className="min-h-screen px-4 pb-24 flex justify-center mt-12">
         <section className="w-full max-w-2xl">
-          <h1>Sessions Test</h1>
+          <h1>Sessions Test Again</h1>
 
           <p className="mt-4 mb-4 text-sm sm:text-base text-white/70">
             Tell me what you have in mind for an in person session. I&apos;ll
