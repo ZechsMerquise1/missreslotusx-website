@@ -12,10 +12,11 @@ jobs:
       - name: Deploy to MLX production via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.MLX_HOST }}
-          username: ${{ secrets.MLX_USER }}      # should be "mistresslotusx"
-          password: ${{ secrets.MLX_PASSWORD }}  # NEW: using password instead of key
-          port: 22
+          # Reuse the same host and key that staging uses
+          host: ${{ secrets.MLX_STAGING_HOST }}
+          port: ${{ secrets.MLX_STAGING_PORT }}
+          username: ${{ secrets.MLX_USER }}           # should be "mistresslotusx"
+          key: ${{ secrets.MLX_STAGING_SSH_KEY }}     # same private key as staging
           script: |
             # Go to your production app folder
             cd /home/mistresslotusx/htdocs/mistresslotusx.com/app
