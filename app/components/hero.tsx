@@ -22,7 +22,7 @@ export default function Hero() {
       {/* Centered content */}
       <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-4 text-center">
         <h1 className="mb-4">
-          THIS IS THE TEST ENVIRONMENT AGAIN 2
+          THIS IS THE TEST ENVIRONMENT AGAIN 3
         </h1>
 
         <p className="mb-8 max-w-2xl">
