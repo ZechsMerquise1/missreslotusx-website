@@ -1,0 +1,35 @@
+name: Deploy to Production
+
+on:
+  # Manual trigger from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to MLX production via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.MLX_HOST }}
+          username: ${{ secrets.MLX_USER }}
+          key: ${{ secrets.MLX_KEY }}
+          port: 22
+          script: |
+            # Go to your production app folder
+            cd /home/mistresslotusx/htdocs/mistresslotusx.com/app
+
+            # Allow git to trust this directory (fixes "dubious ownership" error)
+            git config --global --add safe.directory /home/mistresslotusx/htdocs/mistresslotusx.com
+
+            # Sync code from GitHub main branch
+            git fetch origin
+            git reset --hard origin/main
+
+            # Install all dependencies and build
+            npm install
+            npm run build
+
+            # Restart PM2 process (change name if your prod process is different)
+            pm2 restart mlx-prod || echo "PM2 process 'mlx-prod' not found, please restart your prod process manually."
