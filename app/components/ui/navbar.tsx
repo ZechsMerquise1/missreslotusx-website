@@ -3,18 +3,16 @@
 import { useState, memo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Button from "./button";
 import { motion } from "framer-motion";
 
 function NavbarComponent() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Removed: Content, Links
   const navItems = [
-    { href: "/content", label: "Content" },
     { href: "/sessions", label: "Sessions" },
     { href: "/customs", label: "Customs" },
-    { href: "/links", label: "Links" },
   ];
 
   return (
@@ -62,13 +60,9 @@ function NavbarComponent() {
             })}
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="hidden sm:block">
-            <Button className="px-4 py-1.5 text-sm bg-white text-black border-white hover:bg-white/90">
-              Get in Touch
-            </Button>
-          </div>
-
+          {/* Removed desktop CTA */}
+          {/* Removed Button */}
+          
           {/* Mobile hamburger */}
           <button
             type="button"
@@ -102,11 +96,7 @@ function NavbarComponent() {
                 </Link>
               ))}
 
-              <div className="pt-2">
-                <Button className="w-full px-4 py-2 text-sm bg-white text-black border-white hover:bg-white/90">
-                  Get in Touch
-                </Button>
-              </div>
+              {/* Removed mobile CTA */}
             </nav>
           </div>
         )}
