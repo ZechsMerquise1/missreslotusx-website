@@ -34,35 +34,35 @@ export default function SessionsPage() {
     });
   };
 
-const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setSubmitting(true);
-  setSubmitStatus("idle");
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setSubmitStatus("idle");
 
-  // Capture the form BEFORE any awaits (fixes the null reset error)
-  const form = e.currentTarget;
+    // Capture the form BEFORE any awaits (fixes the null reset error)
+    const form = e.currentTarget;
 
-  try {
-    const formData = new FormData(form);
+    try {
+      const formData = new FormData(form);
 
-    const res = await fetch("/api/session-request", {
-      method: "POST",
-      body: formData,
-    });
+      const res = await fetch("/api/session-request", {
+        method: "POST",
+        body: formData,
+      });
 
-    if (!res.ok) {
-      throw new Error("Failed to send");
+      if (!res.ok) {
+        throw new Error("Failed to send");
+      }
+
+      setSubmitStatus("success");
+      form.reset(); // ✅ safe now — no more "reading 'reset'" error
+    } catch (err) {
+      console.error(err);
+      setSubmitStatus("error");
+    } finally {
+      setSubmitting(false);
     }
-
-    setSubmitStatus("success");
-    form.reset(); // ✅ safe now — no more "reading 'reset'" error
-  } catch (err) {
-    console.error(err);
-    setSubmitStatus("error");
-  } finally {
-    setSubmitting(false);
-  }
-};
+  };
 
 
   const tabs: { key: TabKey; label: string }[] = [
