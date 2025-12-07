@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, memo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Button from "./button";
 import { motion } from "framer-motion";
 
-export default function Navbar() {
+function NavbarComponent() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -114,3 +114,5 @@ export default function Navbar() {
     </header>
   );
 }
+
+export default memo(NavbarComponent);

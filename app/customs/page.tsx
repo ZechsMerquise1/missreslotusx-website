@@ -45,7 +45,7 @@ export default function CustomsPage() {
       <Navbar />
 
       <main className="min-h-screen px-4 pb-16 flex justify-center">
-        <section className="w-full max-w-2xl mt-12">
+        <section className="w-full max-w-2xl mt-6 sm:mt-12">
           <h1>Customs</h1>
 
           <p className="mt-4 mb-8 text-sm sm:text-base text-white/70">
@@ -69,7 +69,7 @@ export default function CustomsPage() {
                   name="name"
                   type="text"
                   required
-                  className="mt-2 w-full rounded-2xl border border-white/20 bg-black/40 px-4 py-3 text-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/40"
+                  className="mt-2 w-full rounded-2xl border border-white/20 bg-black/40 px-4 py-3 text-base text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/40"
                   placeholder="How should I address you?"
                 />
               </div>
@@ -87,7 +87,7 @@ export default function CustomsPage() {
                   name="email"
                   type="email"
                   required
-                  className="mt-2 w-full rounded-2xl border border-white/20 bg-black/40 px-4 py-3 text-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/40"
+                  className="mt-2 w-full rounded-2xl border border-white/20 bg-black/40 px-4 py-3 text-base text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/40"
                   placeholder="Where should I reply?"
                 />
               </div>
@@ -110,7 +110,7 @@ export default function CustomsPage() {
                     />
                     <div
                       className="
-                        w-full rounded-full px-3 py-2 text-center text-xs sm:text-sm
+                        w-full rounded-full px-3 py-2 text-center text-sm sm:text-base
                         bg-black/30 text-white/80 border border-white/25 shadow-glass backdrop-blur-xl
                         transition-all
                         group-hover:border-white/40 group-hover:bg-white/5
@@ -134,7 +134,7 @@ export default function CustomsPage() {
                     />
                     <div
                       className="
-                        w-full rounded-full px-3 py-2 text-center text-xs sm:text-sm
+                        w-full rounded-full px-3 py-2 text-center text-sm sm:text-base
                         bg-black/30 text-white/80 border border-white/25 shadow-glass backdrop-blur-xl
                         transition-all
                         group-hover:border-white/40 group-hover:bg-white/5
@@ -158,7 +158,7 @@ export default function CustomsPage() {
                     />
                     <div
                       className="
-                        w-full rounded-full px-3 py-2 text-center text-xs sm:text-sm
+                        w-full rounded-full px-3 py-2 text-center text-sm sm:text-base
                         bg-black/30 text-white/80 border border-white/25 shadow-glass backdrop-blur-xl
                         transition-all
                         group-hover:border-white/40 group-hover:bg-white/5
@@ -186,7 +186,7 @@ export default function CustomsPage() {
                   id="details"
                   name="details"
                   required
-                  className="mt-2 w-full min-h-[160px] rounded-2xl border border-white/20 bg-black/40 px-4 py-3 text-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/40"
+                  className="mt-2 w-full min-h-[160px] rounded-2xl border border-white/20 bg-black/40 px-4 py-3 text-base text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/40"
                   placeholder="Describe what you want: length, outfit, tone, boundaries, and when you’d like it delivered."
                 />
                 <p className="mt-2 text-xs text-white/60">
