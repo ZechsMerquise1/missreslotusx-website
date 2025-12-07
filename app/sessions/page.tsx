@@ -1,7 +1,7 @@
 // app/sessions/page.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 import Navbar from "../components/ui/navbar";
 
 type TabKey = "inPerson" | "video" | "text";
@@ -9,6 +9,10 @@ type TabKey = "inPerson" | "video" | "text";
 export default function SessionsPage() {
   const [activeTab, setActiveTab] = useState<TabKey>("inPerson");
   const [formInView, setFormInView] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">(
+    "idle"
+  );
 
   const handleTabChange = (tab: TabKey) => {
     setActiveTab(tab);
@@ -29,6 +33,37 @@ export default function SessionsPage() {
       behavior: "smooth",
     });
   };
+
+const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  setSubmitting(true);
+  setSubmitStatus("idle");
+
+  // Capture the form BEFORE any awaits (fixes the null reset error)
+  const form = e.currentTarget;
+
+  try {
+    const formData = new FormData(form);
+
+    const res = await fetch("/api/session-request", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to send");
+    }
+
+    setSubmitStatus("success");
+    form.reset(); // ✅ safe now — no more "reading 'reset'" error
+  } catch (err) {
+    console.error(err);
+    setSubmitStatus("error");
+  } finally {
+    setSubmitting(false);
+  }
+};
+
 
   const tabs: { key: TabKey; label: string }[] = [
     { key: "inPerson", label: "In-Person Sessions" },
@@ -84,7 +119,7 @@ export default function SessionsPage() {
                       !isActive && "text-white/60",
 
                       // active: thicker + brighter white underline
-                      isActive && "text-white border-b-2 border-white"
+                      isActive && "text-white border-b-2 border-white",
                     ].join(" ")}
                   >
                     {mobileLabel}
@@ -93,7 +128,6 @@ export default function SessionsPage() {
               })}
             </nav>
           </div>
-
 
           {/* Left menu (desktop only, fixed and aligned to container) */}
           <aside
@@ -255,11 +289,15 @@ export default function SessionsPage() {
               <div className="space-y-4">
                 <h1>Video Sessions</h1>
                 <p className="mt-4 text-sm sm:text-base text-white/70">
-                  Video sessions are available for those who want real-time connection, control, and engagement from a distance.
-                  You may request custom scenarios, roleplay, domination, guided tasks, or accountability-focused sessions.
-                  <br /><br />
-                  My session rate depends on length and content. If your request is approved.
-                  I will coordinate a time, platform, and structure that fits your request.
+                  Video sessions are available for those who want real-time connection,
+                  control, and engagement from a distance. You may request custom
+                  scenarios, roleplay, domination, guided tasks, or
+                  accountability-focused sessions.
+                  <br />
+                  <br />
+                  My session rate depends on length and content. If your request is
+                  approved. I will coordinate a time, platform, and structure that fits
+                  your request.
                 </p>
               </div>
             )}
@@ -269,13 +307,15 @@ export default function SessionsPage() {
               <div className="space-y-4">
                 <h1>Text Sessions</h1>
                 <p className="mt-4 text-sm sm:text-base text-white/70">
-                  Text sessions offer a flexible, ongoing way to connect, explore, and receive
-                  direction throughout your day. These exchanges may include roleplay, tasks,
-                  accountability, teasing, discipline, or focused conversation tailored to your
-                  interests and limits.
-                  <br /><br />
-                  Rates depend on the duration and structure of the session. If your request is approved, I will outline the available pacing
-                  options and how our text-based sessions will be organized.
+                  Text sessions offer a flexible, ongoing way to connect, explore, and
+                  receive direction throughout your day. These exchanges may include
+                  roleplay, tasks, accountability, teasing, discipline, or focused
+                  conversation tailored to your interests and limits.
+                  <br />
+                  <br />
+                  Rates depend on the duration and structure of the session. If your
+                  request is approved, I will outline the available pacing options and
+                  how our text-based sessions will be organized.
                 </p>
               </div>
             )}
@@ -285,7 +325,7 @@ export default function SessionsPage() {
               id="session-form"
               className="mt-10 rounded-3xl border border-white/20 bg-[#1b1b1e] p-6 sm:p-8 backdrop-blur-xl shadow-glass"
             >
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 {/* Hidden session type field */}
                 <input type="hidden" name="sessionType" value={activeTab} />
 
@@ -325,90 +365,6 @@ export default function SessionsPage() {
                   />
                 </div>
 
-                {/* Session format pills – only for In-Person, styled like Customs */}
-                {activeTab === "inPerson" && (
-                  <div>
-                    <p className="block text-xs font-medium uppercase tracking-[0.15em] text-white/80">
-                      Session format
-                    </p>
-
-                    <div className="mt-3 grid grid-cols-3 gap-3">
-                      {/* Solo */}
-                      <label className="group cursor-pointer">
-                        <input
-                          type="radio"
-                          name="sessionFormat"
-                          value="solo"
-                          className="peer sr-only"
-                          required
-                        />
-                        <div
-                          className="
-                            w-full rounded-full px-3 py-2 text-center text-xs sm:text-sm
-                            bg-black/30 text-white/80 border border-white/25 shadow-glass backdrop-blur-xl
-                            transition-all
-                            group-hover:border-white/40 group-hover:bg-white/5
-
-                            peer-checked:border-purple-400
-                            peer-checked:text-white
-                            peer-checked:shadow-[0_0_12px_rgba(168,85,247,0.5)]
-                          "
-                        >
-                          Solo
-                        </div>
-                      </label>
-
-                      {/* G/G */}
-                      <label className="group cursor-pointer">
-                        <input
-                          type="radio"
-                          name="sessionFormat"
-                          value="gg"
-                          className="peer sr-only"
-                        />
-                        <div
-                          className="
-                            w-full rounded-full px-3 py-2 text-center text-xs sm:text-sm
-                            bg-black/30 text-white/80 border border-white/25 shadow-glass backdrop-blur-xl
-                            transition-all
-                            group-hover:border-white/40 group-hover:bg-white/5
-
-                            peer-checked:border-purple-400
-                            peer-checked:text-white
-                            peer-checked:shadow-[0_0_12px_rgba(168,85,247,0.5)]
-                          "
-                        >
-                          G/G
-                        </div>
-                      </label>
-
-                      {/* B/G */}
-                      <label className="group cursor-pointer">
-                        <input
-                          type="radio"
-                          name="sessionFormat"
-                          value="bg"
-                          className="peer sr-only"
-                        />
-                        <div
-                          className="
-                            w-full rounded-full px-3 py-2 text-center text-xs sm:text-sm
-                            bg-black/30 text-white/80 border border-white/25 shadow-glass backdrop-blur-xl
-                            transition-all
-                            group-hover:border-white/40 group-hover:bg-white/5
-
-                            peer-checked:border-purple-400
-                            peer-checked:text-white
-                            peer-checked:shadow-[0_0_12px_rgba(168,85,247,0.5)]
-                          "
-                        >
-                          B/G
-                        </div>
-                      </label>
-                    </div>
-                  </div>
-                )}
-
                 {/* Session Request Details */}
                 <div>
                   <label
@@ -431,15 +387,28 @@ export default function SessionsPage() {
                 </div>
 
                 {/* Submit */}
-                <div className="pt-2 flex justify-end">
+                <div className="pt-2 flex flex-col items-end gap-2">
                   <button
                     type="submit"
+                    disabled={submitting}
                     className="inline-flex items-center justify-center rounded-full px-6 py-2.5 text-sm font-medium
                                bg-white/15 text-white border border-white/40 shadow-glass backdrop-blur-xl
-                               hover:bg-white/20 hover:border-white/40 hover:shadow-xl transition"
+                               hover:bg-white/20 hover:border-white/40 hover:shadow-xl transition
+                               disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Submit Session Request
+                    {submitting ? "Sending..." : "Submit Session Request"}
                   </button>
+
+                  {submitStatus === "success" && (
+                    <p className="text-xs text-emerald-400">
+                      Thank you, your request has been sent.
+                    </p>
+                  )}
+                  {submitStatus === "error" && (
+                    <p className="text-xs text-red-400">
+                      Something went wrong sending your request. Please try again.
+                    </p>
+                  )}
                 </div>
               </form>
             </div>

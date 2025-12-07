@@ -1,9 +1,45 @@
 // app/customs/page.tsx
 "use client";
 
+import { useState, type FormEvent } from "react";
 import Navbar from "../components/ui/navbar";
 
 export default function CustomsPage() {
+  const [submitting, setSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setSubmitStatus("idle");
+
+    // 🔑 capture the form before any await so it doesn't become null
+    const form = e.currentTarget;
+
+    try {
+      const formData = new FormData(form);
+
+      const res = await fetch("/api/custom-request", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to send");
+      }
+
+      setSubmitStatus("success");
+      form.reset(); // ✅ use the saved form reference
+    } catch (err) {
+      console.error(err);
+      setSubmitStatus("error");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -13,13 +49,13 @@ export default function CustomsPage() {
           <h1>Customs</h1>
 
           <p className="mt-4 mb-8 text-sm sm:text-base text-white/70">
-            Tell me what you have in mind for your custom. I&apos;ll review your request
-            and get back to you by email with rates and next steps.
+            Tell me what you have in mind for your custom. I&apos;ll review your
+            request and get back to you by email with rates and next steps.
           </p>
 
           {/* Updated lighter grey container with better contrast */}
           <div className="rounded-3xl border border-white/30 bg-[#232427] p-6 sm:p-8 backdrop-blur-xl shadow-glass">
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               {/* Name */}
               <div>
                 <label
@@ -154,20 +190,34 @@ export default function CustomsPage() {
                   placeholder="Describe what you want: length, outfit, tone, boundaries, and when you’d like it delivered."
                 />
                 <p className="mt-2 text-xs text-white/60">
-                  Please do not include personal handles; I will reply directly to your email.
+                  Please do not include personal handles; I will reply directly to
+                  your email.
                 </p>
               </div>
 
               {/* Submit */}
-              <div className="pt-2 flex justify-end">
+              <div className="pt-2 flex flex-col items-end gap-2">
                 <button
                   type="submit"
+                  disabled={submitting}
                   className="inline-flex items-center justify-center rounded-full px-6 py-2.5 text-sm font-medium
                              bg-white/10 text-white border border-white/25 shadow-glass backdrop-blur-xl
-                             hover:bg-white/20 hover:border-white/40 hover:shadow-xl transition"
+                             hover:bg-white/20 hover:border-white/40 hover:shadow-xl transition
+                             disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Submit Request
+                  {submitting ? "Sending..." : "Submit Request"}
                 </button>
+
+                {submitStatus === "success" && (
+                  <p className="text-xs text-emerald-400">
+                    Thank you, your custom request has been sent.
+                  </p>
+                )}
+                {submitStatus === "error" && (
+                  <p className="text-xs text-red-400">
+                    Something went wrong sending your request. Please try again.
+                  </p>
+                )}
               </div>
             </form>
           </div>
