@@ -241,12 +241,12 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
                           </li>
                           <li>
                             Venmo:{" "}
-                            <span className="font-medium text-white">MissLxX</span>
+                            <span className="font-medium text-white">MissLX</span>
                           </li>
                           <li>
                             PayPal:{" "}
                             <span className="font-medium text-white">
-                              available upon request
+                              Available upon request
                             </span>
                           </li>
                         </ul>
