@@ -15,7 +15,6 @@ export default function CustomsPage() {
     setSubmitting(true);
     setSubmitStatus("idle");
 
-    // 🔑 capture the form before any await so it doesn't become null
     const form = e.currentTarget;
 
     try {
@@ -31,7 +30,7 @@ export default function CustomsPage() {
       }
 
       setSubmitStatus("success");
-      form.reset(); // ✅ use the saved form reference
+      form.reset();
     } catch (err) {
       console.error(err);
       setSubmitStatus("error");
@@ -44,7 +43,10 @@ export default function CustomsPage() {
     <>
       <Navbar />
 
-      <main className="min-h-screen px-4 pb-16 flex justify-center">
+      {/* Background glow (same as Content / Sessions / Links) */}
+      <div className="fixed inset-0 -z-10 pointer-events-none bg-gradient-to-b from-[#5b21b62e] via-transparent to-transparent" />
+
+      <main className="min-h-screen px-4 pb-16 flex justify-center bg-[var(--bg)] text-white">
         <section className="w-full max-w-2xl mt-6 sm:mt-12">
           <h1>Customs</h1>
 
@@ -53,7 +55,6 @@ export default function CustomsPage() {
             request and get back to you by email with rates and next steps.
           </p>
 
-          {/* Updated lighter grey container with better contrast */}
           <div className="rounded-3xl border border-white/30 bg-[#232427] p-6 sm:p-8 backdrop-blur-xl shadow-glass">
             <form className="space-y-6" onSubmit={handleSubmit}>
               {/* Name */}

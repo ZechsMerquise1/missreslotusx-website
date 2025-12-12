@@ -1,6 +1,7 @@
 // components/hero.tsx
 import Image from "next/image";
 import Button from "./ui/button";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -45,16 +46,20 @@ export default function Hero() {
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-4">
-          <Button className="px-6 py-2.5 text-sm sm:text-base">
-            Book Session
-          </Button>
+          <Link href="/content">
+            <Button className="px-6 py-2.5 text-sm sm:text-base">
+              Subscribe
+            </Button>
+          </Link>
 
-          <Button
-            variant="secondary"
-            className="px-6 py-2.5 text-sm sm:text-base bg-transparent border border-white text-white hover:bg-white hover:text-black transition"
-          >
-            Request Custom
-          </Button>
+          <Link href="/customs">
+            <Button
+              variant="secondary"
+              className="px-6 py-2.5 text-sm sm:text-base bg-transparent border border-white text-white hover:bg-white hover:text-black transition"
+            >
+              Request Custom
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

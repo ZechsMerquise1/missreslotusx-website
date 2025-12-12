@@ -10,6 +10,8 @@ function NavbarComponent() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navItems = [
+    { href: "/content", label: "Content" },
+    { href: "/links", label: "Links" },
     { href: "/sessions", label: "Sessions" },
     { href: "/customs", label: "Customs" },
   ];
