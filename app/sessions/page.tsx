@@ -233,32 +233,74 @@ export default function SessionsPage() {
                           expectations, and logistics so we can determine whether we
                           are a good fit.
                         </p>
-                        <p className="mt-2 text-sm text-white/70">
-                          Most in person sessions fall within a standard professional
-                          range. Your exact rate will depend on length, content, and
-                          experience level. The initial tribute is a minimum of{" "}
-                          <span className="font-semibold">$50</span> and, if we move
-                          forward, it is applied toward your final booking. Tribute is
-                          payable via:
-                        </p>
-                        <ul className="mt-2 text-sm text-white/70 list-disc list-inside space-y-1">
-                          <li>
-                            CashApp:{" "}
-                            <span className="font-medium text-white">
-                              $MistressLotusX
-                            </span>
-                          </li>
-                          <li>
-                            Venmo:{" "}
-                            <span className="font-medium text-white">MissLX</span>
-                          </li>
-                          <li>
-                            PayPal:{" "}
-                            <span className="font-medium text-white">
-                              Available upon request
-                            </span>
-                          </li>
-                        </ul>
+<p className="mt-2 text-sm text-white/70">
+  Most in person sessions fall within a standard professional
+  range. Your exact rate will depend on length and kinks. The initial tribute is a minimum of{" "}
+  <span className="font-semibold">$50</span> and, if we move forward,
+  it is applied toward your final booking. Tribute is payable via:
+</p>
+
+<div className="mt-5 space-y-4">
+
+  {/* CashApp */}
+  <div className="flex items-center justify-between">
+    <span className="text-[11px] font-semibold tracking-[0.12em] uppercase text-white/70">
+      CashApp
+    </span>
+
+    <a
+      href="https://cash.app/$MistressLotusX"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="
+        inline-flex items-center gap-1.5 rounded-full border border-white/40 bg-white/10 
+        px-3 py-1 text-xs font-medium text-white/90 
+        hover:bg-white/20 hover:border-white/60 hover:text-white 
+        transition shadow-sm cursor-pointer
+      "
+    >
+      $MistressLotusX
+      <span className="text-white/80 text-[12px] leading-none">↗</span>
+    </a>
+  </div>
+
+  {/* Venmo */}
+  <div className="flex items-center justify-between">
+    <span className="text-[11px] font-semibold tracking-[0.12em] uppercase text-white/70">
+      Venmo
+    </span>
+
+    <a
+      href="https://venmo.com/u/MissLX"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="
+        inline-flex items-center gap-1.5 rounded-full border border-white/40 bg-white/10 
+        px-3 py-1 text-xs font-medium text-white/90 
+        hover:bg-white/20 hover:border-white/60 hover:text-white 
+        transition shadow-sm cursor-pointer
+      "
+    >
+      MissLX
+      <span className="text-white/80 text-[12px] leading-none">↗</span>
+    </a>
+  </div>
+
+  {/* PayPal */}
+  <div className="flex items-center justify-between">
+    <span className="text-[11px] font-semibold tracking-[0.12em] uppercase text-white/70">
+      PayPal
+    </span>
+
+    <span className="text-xs text-white/60">Available upon request</span>
+  </div>
+
+</div>
+
+
+
+
+
                       </div>
 
                       {/* Booking & Security Deposit */}
@@ -273,7 +315,7 @@ export default function SessionsPage() {
                         </h2>
                         <p className="mt-2 text-sm text-white/70 leading-relaxed">
                           A security deposit of{" "}
-                          <span className="font-semibold">$200</span> or{" "}
+                          <span className="font-semibold">$300</span> or{" "}
                           <span className="font-semibold">
                             20% of the agreed session rate
                           </span>
@@ -284,7 +326,6 @@ export default function SessionsPage() {
                         <p className="mt-2 text-sm text-white/70 leading-relaxed">
                           Deposits are non refundable, but sessions may be rescheduled
                           with at least <span className="font-semibold">72 hours notice</span>{" "}
-                          provided by either party.
                         </p>
                       </div>
                     </div>

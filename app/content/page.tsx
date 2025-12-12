@@ -3,9 +3,9 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "../components/ui/navbar";
 
-const KOC_URL = "https://kinkoncommand.com";
-const ONLYFANS_URL = "https://onlyfans.com/"; // update with your handle
-const LOYALFANS_URL = "https://loyalfans.com/"; // update with your handle
+const KOC_URL = "https://kinkoncommand.com/?src=lw";
+const ONLYFANS_URL = "https://onlyfans.com/mistresslotusx"; // update with your handle
+const LOYALFANS_URL = "https://loyalfans.com/mistresslotusx"; // update with your handle
 
 export default function ContentPage() {
   return (
@@ -26,8 +26,8 @@ export default function ContentPage() {
               Where my content lives
             </h1>
             <p className="mt-4 max-w-2xl text-sm text-white/60 md:text-base">
-              These are the platforms where you can watch my work. KinkOnCommand is
-              my primary home for full length scenes and real BDSM content.
+              These are the platforms where you can view my content. KinkOnCommand is
+              my primary home for full length lezdom, femdom and solo scenes.
             </p>
           </section>
 
