@@ -34,36 +34,35 @@ export default function SessionsPage() {
     });
   };
 
-const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setSubmitting(true);
-  setSubmitStatus("idle");
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setSubmitStatus("idle");
 
-  // Capture the form BEFORE any awaits (fixes the null reset error)
-  const form = e.currentTarget;
+    // Capture the form BEFORE any awaits (fixes the null reset error)
+    const form = e.currentTarget;
 
-  try {
-    const formData = new FormData(form);
+    try {
+      const formData = new FormData(form);
 
-    const res = await fetch("/api/session-request", {
-      method: "POST",
-      body: formData,
-    });
+      const res = await fetch("/api/session-request", {
+        method: "POST",
+        body: formData,
+      });
 
-    if (!res.ok) {
-      throw new Error("Failed to send");
+      if (!res.ok) {
+        throw new Error("Failed to send");
+      }
+
+      setSubmitStatus("success");
+      form.reset(); // ✅ safe now — no more "reading 'reset'" error
+    } catch (err) {
+      console.error(err);
+      setSubmitStatus("error");
+    } finally {
+      setSubmitting(false);
     }
-
-    setSubmitStatus("success");
-    form.reset(); // ✅ safe now — no more "reading 'reset'" error
-  } catch (err) {
-    console.error(err);
-    setSubmitStatus("error");
-  } finally {
-    setSubmitting(false);
-  }
-};
-
+  };
 
   const tabs: { key: TabKey; label: string }[] = [
     { key: "inPerson", label: "In-Person Sessions" },
@@ -91,7 +90,11 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     <>
       <Navbar />
 
-      <main className="min-h-screen px-4 pb-24 mt-3 sm:mt-12">
+      {/* Subtle persistent background glow */}
+      <div className="fixed inset-0 -z-10 pointer-events-none bg-gradient-to-b from-[#5b21b62e] via-transparent to-transparent" />
+
+      <main className="min-h-screen px-4 pb-24 mt-3 sm:mt-12 relative">
+
         <div className="w-full max-w-5xl mx-auto relative md:pl-60">
           {/* Mobile tab menu (top), desktop sidebar still below */}
           <div className="md:hidden mb-8">
@@ -131,7 +134,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 
           {/* Left menu (desktop only, fixed and aligned to container) */}
           <aside
-            className="hidden md:block fixed top-32 w-52"
+            className="hidden md:block fixed top-26 w-52"
             style={{ left: "calc(50% - 32rem)" }} // 32rem = half of 5xl (64rem)
           >
             <nav className="text-sm text-white/70">
@@ -170,8 +173,8 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 
                   <p className="mt-4 mb-4 text-sm sm:text-base text-white/70">
                     Tell me what you have in mind for an in person session. I&apos;ll
-                    review your request and get back to you by email with tribute
-                    details, availability, and next steps.
+                    review your request and get back to you by email with session
+                    tribute details, availability, and next steps.
                   </p>
 
                   {/* Desktop-only CTA */}
@@ -203,10 +206,11 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
                         READ THIS FIRST
                       </p>
                       <p className="mt-2 text-sm sm:text-base text-white">
-                        To receive a response you must send the{" "}
-                        <span className="font-semibold">$50 initial tribute</span> with
-                        your session request. Inquiries without a tribute will be
-                        ignored.
+                        Before I respond to any in person session inquiry, a{" "}
+                        <span className="font-semibold">$50 initial tribute</span> is
+                        required with your request. This tribute is a consultation fee
+                        for my time and will be applied toward your booking if we
+                        decide to move forward.
                       </p>
                     </div>
 
@@ -224,13 +228,18 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
                         </h2>
                         <p className="mt-2 text-sm text-white/70 leading-relaxed">
                           I do not entertain or respond to session inquiries without an
-                          initial tribute. This is not a binding session fee, but a
-                          consultation fee for my time to discuss scene details,
-                          expectations, and logistics.
+                          initial tribute. This tribute covers my time reviewing your
+                          request, answering questions, and discussing scene details,
+                          expectations, and logistics so we can determine whether we
+                          are a good fit.
                         </p>
                         <p className="mt-2 text-sm text-white/70">
-                          The initial tribute is a minimum of{" "}
-                          <span className="font-semibold">$50</span>, payable via:
+                          Most in person sessions fall within a standard professional
+                          range. Your exact rate will depend on length, content, and
+                          experience level. The initial tribute is a minimum of{" "}
+                          <span className="font-semibold">$50</span> and, if we move
+                          forward, it is applied toward your final booking. Tribute is
+                          payable via:
                         </p>
                         <ul className="mt-2 text-sm text-white/70 list-disc list-inside space-y-1">
                           <li>
@@ -266,7 +275,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
                           A security deposit of{" "}
                           <span className="font-semibold">$200</span> or{" "}
                           <span className="font-semibold">
-                            20% of the agreed session tribute
+                            20% of the agreed session rate
                           </span>
                           , whichever is greater, is required to confirm your booking.
                           This deposit is applied to your total session cost and helps
@@ -284,6 +293,76 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
               </div>
             )}
 
+            {/* Kink List – now only shows for In-Person tab */}
+            {activeTab === "inPerson" && (
+              <section className="mt-6 border-t border-white/15 pt-8">
+                <h2 className="text-sm font-semibold tracking-[0.18em] uppercase text-white/80">
+                  Kink List
+                </h2>
+
+                <p className="mt-3 text-sm text-white/70">
+                  Below is a sampling of the types of play I offer in session.
+                  If your desired kink is not listed, you are welcome to inquire
+                  when you submit your request.
+                </p>
+
+                <div className="mt-6 grid gap-5 sm:grid-cols-2">
+                  {/* Bondage & Containment */}
+                  <div className="rounded-2xl border border-white/20 bg-white/5 p-5">
+                    <h3 className="text-xs font-semibold tracking-[0.12em] uppercase text-white/85">
+                      Bondage &amp; Containment
+                    </h3>
+                    <ul className="mt-2 space-y-1 text-sm text-white/75 list-disc list-inside">
+                      <li>Bondage (long term &amp; short term)</li>
+                      <li>Chastity</li>
+                      <li>Restraints</li>
+                      <li>Mummification</li>
+                    </ul>
+                  </div>
+
+                  {/* Sensation, Pain & Edge */}
+                  <div className="rounded-2xl border border-white/20 bg-white/5 p-5">
+                    <h3 className="text-xs font-semibold tracking-[0.12em] uppercase text-white/85">
+                      Sensation, Pain &amp; Edge
+                    </h3>
+                    <ul className="mt-2 space-y-1 text-sm text-white/75 list-disc list-inside">
+                      <li>Impact</li>
+                      <li>Sensation play</li>
+                      <li>Electro</li>
+                      <li>Sensory deprivation</li>
+                      <li>Breathplay</li>
+                      <li>Spitting</li>
+                    </ul>
+                  </div>
+
+                  {/* Power, Humiliation & Service */}
+                  <div className="rounded-2xl border border-white/20 bg-white/5 p-5">
+                    <h3 className="text-xs font-semibold tracking-[0.12em] uppercase text-white/85">
+                      Power, Humiliation &amp; Service
+                    </h3>
+                    <ul className="mt-2 space-y-1 text-sm text-white/75 list-disc list-inside">
+                      <li>Blackmail</li>
+                      <li>Humiliation (physical, mental, verbal)</li>
+                      <li>Service</li>
+                      <li>Sissification</li>
+                    </ul>
+                  </div>
+
+                  {/* Worship, Roleplay & Control */}
+                  <div className="rounded-2xl border border-white/20 bg-white/5 p-5">
+                    <h3 className="text-xs font-semibold tracking-[0.12em] uppercase text-white/85">
+                      Worship, Roleplay &amp; Control
+                    </h3>
+                    <ul className="mt-2 space-y-1 text-sm text-white/75 list-disc list-inside">
+                      <li>Foot worship</li>
+                      <li>Pet play</li>
+                      <li>Tease &amp; Denial</li>
+                    </ul>
+                  </div>
+                </div>
+              </section>
+            )}
+
             {/* Video Sessions */}
             {activeTab === "video" && (
               <div className="space-y-4">
@@ -295,9 +374,9 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
                   accountability-focused sessions.
                   <br />
                   <br />
-                  My session rate depends on length and content. If your request is
-                  approved. I will coordinate a time, platform, and structure that fits
-                  your request.
+                  Session tribute depends on length and content. If your request is
+                  approved, I will coordinate a time, platform, and structure that fits
+                  your request and provide clear tribute details before we confirm.
                 </p>
               </div>
             )}
@@ -314,8 +393,9 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
                   <br />
                   <br />
                   Rates depend on the duration and structure of the session. If your
-                  request is approved, I will outline the available pacing options and
-                  how our text-based sessions will be organized.
+                  request is approved, I will outline the available pacing options,
+                  tribute structure, and how our text-based sessions will be organized
+                  before we commit to a plan.
                 </p>
               </div>
             )}

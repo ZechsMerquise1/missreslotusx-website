@@ -9,15 +9,14 @@ function NavbarComponent() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Removed: Content, Links
   const navItems = [
     { href: "/sessions", label: "Sessions" },
     { href: "/customs", label: "Customs" },
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full">
-      <div className="mx-auto max-w-6xl px-4 py-4 bg-black/40 backdrop-blur-md border-b border-white/10">
+    <header className="sticky top-0 z-40 w-full bg-gradient-to-b from-black/80 via-black/50 to-transparent backdrop-blur-md">
+      <div className="mx-auto max-w-6xl px-4 py-4 border-b border-white/10">
         <div className="flex items-center justify-between">
 
           {/* Brand */}
@@ -60,9 +59,6 @@ function NavbarComponent() {
             })}
           </nav>
 
-          {/* Removed desktop CTA */}
-          {/* Removed Button */}
-          
           {/* Mobile hamburger */}
           <button
             type="button"
@@ -95,8 +91,6 @@ function NavbarComponent() {
                   {item.label}
                 </Link>
               ))}
-
-              {/* Removed mobile CTA */}
             </nav>
           </div>
         )}
