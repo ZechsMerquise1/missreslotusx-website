@@ -209,8 +209,7 @@ export default function SessionsPage() {
                         Before I respond to any in person session inquiry, a{" "}
                         <span className="font-semibold">$50 initial tribute</span> is
                         required with your request. This tribute is a consultation fee
-                        for my time and will be applied toward your booking if we
-                        decide to move forward.
+                        for my time and will be applied toward your booking.
                       </p>
                     </div>
 
@@ -325,7 +324,7 @@ export default function SessionsPage() {
                         </p>
                         <p className="mt-2 text-sm text-white/70 leading-relaxed">
                           Deposits are non refundable, but sessions may be rescheduled
-                          with at least <span className="font-semibold">72 hours notice</span>{" "}
+                          with at least <span className="font-semibold">72 hours notice.</span>{" "}
                         </p>
                       </div>
                     </div>
