@@ -26,4 +26,5 @@ jobs:
             npm install
             npm run build
 
-            pm2 restart mlx-test
+            pm2 restart mlx-test --update-env || pm2 start npm --name mlx-test -- start
+            pm2 save
