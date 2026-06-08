@@ -15,6 +15,13 @@ const platformLinks = [
     href: "https://onlyfans.com/mistresslotusx",
     icon: "onlyfans",
   },
+
+  {
+    label: "SextPanther",
+    href: "https://www.sextpanther.com/misslotus",
+    icon: "sp",
+  },
+
   {
     label: "LoyalFans",
     href: "https://loyalfans.com/mistresslotusx",
@@ -66,6 +73,7 @@ const iconMap: Record<string, string> = {
   throne: "/logos/logo-throne.png",
   venmo: "/logos/logo-venmo.png",
   cashapp: "/logos/logo-cashapp.png",
+  sp: "/logos/logo-sp.png",
 };
 
 export default function LinksPage() {

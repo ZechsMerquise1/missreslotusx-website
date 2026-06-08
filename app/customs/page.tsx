@@ -188,7 +188,7 @@ export default function CustomsPage() {
                   name="details"
                   required
                   className="mt-2 w-full min-h-[160px] rounded-2xl border border-white/20 bg-black/40 px-4 py-3 text-base text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/40"
-                  placeholder="Describe what you want: length, outfit, tone, boundaries, and when you’d like it delivered."
+                  placeholder="Describe what you want: length, kinks, gear, dom/sub, etc."
                 />
                 <p className="mt-2 text-xs text-white/60">
                   Please do not include personal handles; I will reply directly to
