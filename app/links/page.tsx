@@ -5,6 +5,12 @@ import Navbar from "../components/ui/navbar";
 
 const platformLinks = [
   {
+    label: "📱 Video Call Me",
+    href: "https://www.sextpanther.com/misslotus",
+    icon: "sp",
+  },
+ 
+  {
     label: "KinkOnCommand",
     href: "https://kinkoncommand.com/?src=lw",
     sub: "Where all my exclusive content lives plus more creators",
@@ -14,12 +20,6 @@ const platformLinks = [
     label: "OnlyFans",
     href: "https://onlyfans.com/mistresslotusx",
     icon: "onlyfans",
-  },
-
-  {
-    label: "SextPanther",
-    href: "https://www.sextpanther.com/misslotus",
-    icon: "sp",
   },
 
   {

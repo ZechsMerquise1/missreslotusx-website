@@ -52,12 +52,12 @@ export default function Hero() {
             </Button>
           </Link>
 
-          <Link href="/customs">
+          <Link href="https://www.sextpanther.com/misslotus">
             <Button
               variant="secondary"
               className="px-6 py-2.5 text-sm sm:text-base bg-transparent border border-white text-white hover:bg-white hover:text-black transition"
             >
-              Request Custom
+              📱 Video Call Me
             </Button>
           </Link>
         </div>
